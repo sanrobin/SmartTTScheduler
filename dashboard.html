@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Smart Scheduler</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">Smart Scheduler</div>
+        <p class="small" id="welcomeName"></p>
+        <nav class="nav">
+          <a class="active" href="dashboard.html">Admin Dashboard</a>
+          <a href="scheduler.html">Scheduler</a>
+          <button id="btn-reset-data" class="btn secondary">Reset Demo Data</button>
+          <button id="btn-logout" class="btn danger">Logout</button>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <div class="card">
+          <h2>Data Management</h2>
+          <p class="muted">
+            Manage classrooms, subjects, faculty, batches, and teaching assignments. All data is saved in
+            LocalStorage.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <section class="card">
+            <h3>Add Classroom</h3>
+            <form id="form-classroom">
+              <label>Name</label>
+              <input id="classroom-name" required placeholder="e.g. C-301" />
+              <label>Capacity</label>
+              <input id="classroom-capacity" type="number" min="1" required />
+              <label>Type</label>
+              <select id="classroom-type">
+                <option value="classroom">Classroom</option>
+                <option value="lab">Lab</option>
+              </select>
+              <button type="submit">Add Classroom</button>
+            </form>
+          </section>
+
+          <section class="card">
+            <h3>Add Subject</h3>
+            <form id="form-subject">
+              <label>Code</label>
+              <input id="subject-code" required placeholder="e.g. CS220" />
+              <label>Name</label>
+              <input id="subject-name" required placeholder="e.g. AI Lab" />
+              <label>Default Room Type</label>
+              <select id="subject-type">
+                <option value="classroom">Classroom</option>
+                <option value="lab">Lab</option>
+              </select>
+              <button type="submit">Add Subject</button>
+            </form>
+          </section>
+
+          <section class="card">
+            <h3>Add Faculty</h3>
+            <form id="form-faculty">
+              <label>Name</label>
+              <input id="faculty-name" required placeholder="e.g. Dr. Nova" />
+              <button type="submit">Add Faculty</button>
+            </form>
+          </section>
+
+          <section class="card">
+            <h3>Add Batch / Section</h3>
+            <form id="form-batch">
+              <label>Name</label>
+              <input id="batch-name" required placeholder="e.g. CSE-C" />
+              <label>Student Count</label>
+              <input id="batch-size" type="number" min="1" required />
+              <label>Max Classes Per Day</label>
+              <input id="batch-max" type="number" min="1" max="10" value="4" required />
+              <button type="submit">Add Batch</button>
+            </form>
+          </section>
+        </div>
+
+        <section class="card">
+          <h3>Add Teaching Assignment</h3>
+          <p class="small">
+            Fixed slot format: <b>Friday@14:00-15:00;Monday@09:00-10:00</b>
+          </p>
+          <form id="form-assignment" class="grid-3">
+            <div>
+              <label>Batch</label>
+              <select id="assignment-batch"></select>
+            </div>
+            <div>
+              <label>Subject</label>
+              <select id="assignment-subject"></select>
+            </div>
+            <div>
+              <label>Faculty</label>
+              <select id="assignment-faculty"></select>
+            </div>
+            <div>
+              <label>Classes Per Week</label>
+              <input id="assignment-cpw" type="number" min="1" value="3" required />
+            </div>
+            <div>
+              <label>Room Type</label>
+              <select id="assignment-roomtype">
+                <option value="classroom">Classroom</option>
+                <option value="lab">Lab</option>
+              </select>
+            </div>
+            <div>
+              <label>Fixed Slots (optional)</label>
+              <input id="assignment-fixed" placeholder="Friday@14:00-15:00" />
+            </div>
+            <div>
+              <button type="submit">Add Assignment</button>
+            </div>
+          </form>
+        </section>
+
+        <div class="grid-2">
+          <section class="card table-wrap">
+            <h3>Classrooms</h3>
+            <table id="table-classrooms">
+              <thead>
+                <tr><th>Name</th><th>Capacity</th><th>Type</th><th>Action</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+
+          <section class="card table-wrap">
+            <h3>Subjects</h3>
+            <table id="table-subjects">
+              <thead>
+                <tr><th>Code</th><th>Name</th><th>Type</th><th>Action</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+
+          <section class="card table-wrap">
+            <h3>Faculty</h3>
+            <table id="table-faculty">
+              <thead>
+                <tr><th>Name</th><th>Action</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+
+          <section class="card table-wrap">
+            <h3>Batches</h3>
+            <table id="table-batches">
+              <thead>
+                <tr><th>Name</th><th>Size</th><th>Max/day</th><th>Action</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+        </div>
+
+        <section class="card table-wrap">
+          <h3>Teaching Assignments</h3>
+          <table id="table-assignments">
+            <thead>
+              <tr>
+                <th>Batch</th>
+                <th>Subject</th>
+                <th>Faculty</th>
+                <th>Classes/Week</th>
+                <th>Room Type</th>
+                <th>Fixed Slots</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
